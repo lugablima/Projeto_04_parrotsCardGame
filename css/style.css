@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #E5E5E5;
+    background: #EEF9BF;
 }
 
 h1 {
@@ -24,7 +24,7 @@ h1 {
 .cards {
     width: 872px;
     /* height: 326px; */
-    background-color: red; /*apagar*/
+    /* background-color: red; apagar */
 }
 
 .card2, .card4, .card6, .card8, .card10, .card12, .card14 {
@@ -54,4 +54,24 @@ h1 {
 
 .oculto {
     display: none;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 36px;
+        line-height: 42px;
+        text-align: center;
+    }
+
+    .cards {
+        width: 117px;
+        margin-bottom: 34px;
+    }
+
+    .card2, .card4, .card6, .card8, .card10, .card12, .card14 {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: initial;
+        flex-wrap: nowrap;
+    }
 }
