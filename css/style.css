@@ -66,11 +66,19 @@ h1 {
     transform: rotateY(180deg);
 }
 
-.card:hover .verso {
+.selecionado .verso {
     transform: rotateY(0deg);
 }
 
-.card:hover .frente {
+.selecionado .frente {
+    transform: rotateY(-180deg);
+}
+
+.acertou .verso {
+    transform: rotateY(0deg);
+}
+
+.acertou .frente {
     transform: rotateY(-180deg);
 }
 
