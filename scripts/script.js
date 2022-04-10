@@ -1,13 +1,27 @@
+let quantidadeCartas;
 let cardsSelecionados = []; 
-let quantJogadas = 0;
-// let tempoSeg = 0;
-let quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));
+let quantJogadas;
+let tempoSeg;
+let idSetInterval = 0;
+let lista;
 
-while (((quantidadeCartas % 2) !== 0) || (quantidadeCartas < 4) || (quantidadeCartas > 14)) {
-    quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));    
+inicioJogo();
+
+function inicioJogo() {
+    tempoSeg = 0;
+    quantJogadas = 0;
+    quantidadeCartas = 0;
+
+    quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));
+
+    while (((quantidadeCartas % 2) !== 0) || (quantidadeCartas < 4) || (quantidadeCartas > 14)) {
+        quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));    
+    }
+    
+    distribuirCartas();
+    iniciarCronometro();
 }
 
-distribuirCartas();
 
 function distribuirCartas() {
     const elemento = document.querySelector(`.card${quantidadeCartas}`);
@@ -32,6 +46,7 @@ function distribuirCartas() {
 
     arrayCards = arrayCards.sort(comparador);
 
+    elemento.innerHTML = "";
     for(let k = 0; k < quantidadeCartas; k++) {
         elemento.innerHTML += `
         <div class="card" onclick="virarCarta(this)">
@@ -95,27 +110,42 @@ function comparador() {
 }
 
 function contarCartasViradas() {
-    let lista = document.querySelectorAll(".acertou");
+    lista = document.querySelectorAll(".acertou");
 
     if(lista.length === quantidadeCartas) {
-        fimDeJogo();
+        clearInterval(idSetInterval);
+        setTimeout(fimDeJogo, 2000);
     } else {
         lista = [];
     }
 }
 
 function fimDeJogo() {
-    alert(`Você ganhou em ${quantJogadas} jogadas!`);
+    alert(`Você ganhou em ${quantJogadas} jogadas e em ${tempoSeg} segundos!`);
+    let respostaReinicio = prompt("Você gostaria de reiniciar a partida?");
+
+    if(respostaReinicio === "sim") {
+        const elemento = document.querySelector(`.card${quantidadeCartas}`);
+        const el = document.querySelector(".cronometro h6:nth-child(2)");
+
+        for(let k = 0; k < lista.length; k++) {
+            lista[k].classList.remove("acertou");
+        }
+
+        el.innerHTML = `0 s`;
+        elemento.classList.add("oculto");
+        inicioJogo();
+    }
 }
 
-// function iniciarCronômetro() {
-//     elemento = document.querySelector(".cronometro");
-//     elemento.innerHTML = tempo;
-//     setInterval(incrementarTempo, 1000);
-// }
+function iniciarCronometro() {
+    elemento = document.querySelector(".cronometro h6:nth-child(2)");
+    elemento.innerHTML = `${tempoSeg} s`;
+    idSetInterval = setInterval(incrementarTempo, 1000);
+}
 
-// function incrementarTempo() {
-//     elemento = document.querySelector(".cronometro");
-//     tempoSeg++;
-//     elemento.innerHTML = tempoSeg;
-// }
+function incrementarTempo() {
+    elemento = document.querySelector(".cronometro h6:nth-child(2)");
+    tempoSeg++;
+    elemento.innerHTML = `${tempoSeg} s`;
+}
