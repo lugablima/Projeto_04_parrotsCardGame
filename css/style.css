@@ -51,6 +51,7 @@ h1 {
     align-items: center;
     flex-wrap: wrap;
     gap: 34px;
+    margin-bottom: 34px;
 }
 
 .card {
