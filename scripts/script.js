@@ -24,7 +24,7 @@ function inicioJogo() {
 
 
 function distribuirCartas() {
-    const elemento = document.querySelector(`.card${quantidadeCartas}`);
+    const elemento = document.querySelector(`.cards`);
     let arrayImagens = [
         "./images/bobrossparrot.gif",
         "./images/explodyparrot.gif",
@@ -74,11 +74,9 @@ function virarCarta(elemento) {
         cardsSelecionados.push(card);
         quantJogadas++;
 
-        console.log(cardsSelecionados.length);
         if(cardsSelecionados.length === 2) {
-            console.log("Entrei no primeiro if");
             if(cardsSelecionados[0].source === cardsSelecionados[1].source) {
-                console.log("Entrei no segundo if");
+                
                 for(let i = 0; i < cardsSelecionados.length; i++) {
                     cardsSelecionados[i].cardElement.classList.add("acertou");
                     cardsSelecionados[i].cardElement.classList.remove("selecionado");
@@ -86,7 +84,6 @@ function virarCarta(elemento) {
                 cardsSelecionados = [];
                 contarCartasViradas();
             } else {
-                console.log("Entrei no else");
                 setTimeout(desvirarCarta, 1000);
             }
         } 
@@ -94,8 +91,6 @@ function virarCarta(elemento) {
 }
 
 function desvirarCarta() {
-    // let selecionado = document.querySelectorAll(".selecionado");
-    console.log("Entrei no setTimeout");
 
     for(let j = 0; j < cardsSelecionados.length; j++) {
         cardsSelecionados[j].cardElement.classList.remove("selecionado");
@@ -114,7 +109,7 @@ function contarCartasViradas() {
 
     if(lista.length === quantidadeCartas) {
         clearInterval(idSetInterval);
-        setTimeout(fimDeJogo, 2000);
+        setTimeout(fimDeJogo, 1000);
     } else {
         lista = [];
     }
@@ -123,20 +118,17 @@ function contarCartasViradas() {
 function fimDeJogo() {
     alert(`Você ganhou em ${quantJogadas} jogadas e em ${tempoSeg} segundos!`);
     let respostaReinicio = prompt(`Você gostaria de reiniciar a partida? (Obs: Digite "sim" ou "não")`);
-    // respostaReinicio = respostaReinicio.toLowerCase();
-    // if (respostaReinicio !== "sim"){
-    //     if respostaReinicio.includes("ã",1)
-    // }
 
     while((respostaReinicio !== "sim") && (respostaReinicio !== "não")) {
         alert(`Entrada inválida! Digite "sim" ou "não"`);
         respostaReinicio = prompt(`Você gostaria de reiniciar a partida? (Obs: Digite "sim" ou "não")`);
     } 
+
+    const elemento = document.querySelector(`.cards`);
+    const el = document.querySelector(".cronometro h6:nth-child(2)");
     
     if(respostaReinicio === "sim") {
-        const elemento = document.querySelector(`.card${quantidadeCartas}`);
-        const el = document.querySelector(".cronometro h6:nth-child(2)");
-
+        
         for(let k = 0; k < lista.length; k++) {
             lista[k].classList.remove("acertou");
         }
@@ -144,6 +136,9 @@ function fimDeJogo() {
         el.innerHTML = `0 s`;
         elemento.classList.add("oculto");
         inicioJogo();
+    } else {
+        elemento.innerHTML = `<h1>GAME OVER</h1>`;
+        el.parentNode.classList.add("oculto");
     }
 }
 

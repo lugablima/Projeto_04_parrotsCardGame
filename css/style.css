@@ -9,7 +9,10 @@ body {
     flex-direction: column;
     align-items: center;
     background: #EEF9BF;
-    position: relative;
+    position: relative; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none;
 }
 
 h1 {
@@ -41,18 +44,8 @@ h1 {
     color: #75B79E;
 }
 
-/* .margin-bottom-5px {
-    margin-bottom: 5px;
-} */
-
 .cards {
     width: 872px;
-    /* height: 326px; */
-    /* background-color: red; apagar */
-}
-
-.card4, .card6, .card8, .card10, .card12, .card14 {
-    height: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -77,8 +70,10 @@ h1 {
     align-items: center;
     position: absolute;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     transition: all .5s;
     transform-style: preserve-3d;
+    cursor: pointer;
 }
 
 .card img{
@@ -92,6 +87,7 @@ h1 {
 
 .selecionado .verso {
     transform: rotateY(0deg);
+    cursor: default;
 }
 
 .selecionado .frente {
@@ -100,6 +96,7 @@ h1 {
 
 .acertou .verso {
     transform: rotateY(0deg);
+    cursor: default;
 }
 
 .acertou .frente {
@@ -117,16 +114,9 @@ h1 {
         text-align: center;
     }
 
-    /* .cronometro {
-        right: calc(50% - 80px/2);
-    } */
-
     .cards {
         width: 117px;
         margin-bottom: 34px;
-    }
-
-    .card4, .card6, .card8, .card10, .card12, .card14 {
         flex-direction: column;
         justify-content: space-between;
         align-items: initial;
