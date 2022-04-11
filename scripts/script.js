@@ -12,10 +12,10 @@ function inicioJogo() {
     quantJogadas = 0;
     quantidadeCartas = 0;
 
-    quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));
+    quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar? (Obs: Digite apenas números pares de 4 e 14)"));
 
     while (((quantidadeCartas % 2) !== 0) || (quantidadeCartas < 4) || (quantidadeCartas > 14)) {
-        quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar?"));    
+        quantidadeCartas = Number(prompt("Com quantas cartas você quer jogar? (Obs: Digite apenas números pares de 4 e 14)"));    
     }
     
     distribuirCartas();
@@ -122,8 +122,17 @@ function contarCartasViradas() {
 
 function fimDeJogo() {
     alert(`Você ganhou em ${quantJogadas} jogadas e em ${tempoSeg} segundos!`);
-    let respostaReinicio = prompt("Você gostaria de reiniciar a partida?");
+    let respostaReinicio = prompt(`Você gostaria de reiniciar a partida? (Obs: Digite "sim" ou "não")`);
+    // respostaReinicio = respostaReinicio.toLowerCase();
+    // if (respostaReinicio !== "sim"){
+    //     if respostaReinicio.includes("ã",1)
+    // }
 
+    while((respostaReinicio !== "sim") && (respostaReinicio !== "não")) {
+        alert(`Entrada inválida! Digite "sim" ou "não"`);
+        respostaReinicio = prompt(`Você gostaria de reiniciar a partida? (Obs: Digite "sim" ou "não")`);
+    } 
+    
     if(respostaReinicio === "sim") {
         const elemento = document.querySelector(`.card${quantidadeCartas}`);
         const el = document.querySelector(".cronometro h6:nth-child(2)");
